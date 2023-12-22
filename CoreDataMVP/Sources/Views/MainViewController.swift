@@ -26,6 +26,15 @@ class MainViewController: UIViewController {
         return button
     }()
     
+    private lazy var listTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -45,7 +54,7 @@ class MainViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        let views = [printNameTextField, pressButton]
+        let views = [printNameTextField, pressButton, listTableView]
         views.forEach { view.addSubview($0) }
     }
     
@@ -61,7 +70,12 @@ class MainViewController: UIViewController {
             pressButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pressButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             pressButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            pressButton.heightAnchor.constraint(equalToConstant: 50)
+            pressButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            listTableView.topAnchor.constraint(equalTo: pressButton.bottomAnchor, constant: 20),
+            listTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            listTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            listTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
@@ -74,3 +88,27 @@ class MainViewController: UIViewController {
 }
 
 // MARK: - Extensions
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+        }
+    }
+}
