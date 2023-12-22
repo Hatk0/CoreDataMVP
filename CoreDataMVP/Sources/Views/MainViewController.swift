@@ -83,7 +83,16 @@ class MainViewController: UIViewController {
     
     @objc
     func buttonTapped() {
-        
+        if printNameTextField.text != "" {
+            print("")
+        } else {
+            let alert = UIAlertController(title: "Nothing was written",
+                                          message: "Please enter your name",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            self.present(alert, animated: true)
+        }
+        self.printNameTextField.text = ""
     }
 }
 
