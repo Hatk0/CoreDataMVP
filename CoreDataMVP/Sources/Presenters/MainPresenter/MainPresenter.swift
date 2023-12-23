@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - Protocols
+
 protocol UserInteractor {
     var users: [Person] { get }
     func fetchAllUsers()
@@ -12,7 +14,7 @@ class MainPresenter: UserInteractor {
     // MARK: - Properties
     
     weak private var view: MainViewController?
-    private var coordinator: ProjectCoordinator?
+    var coordinator: ProjectCoordinator?
     let coreDataManager: UserPersistenceManager
     var users = [Person]()
     
@@ -36,5 +38,9 @@ class MainPresenter: UserInteractor {
     
     func deleteUser(indexPath: IndexPath) {
         coreDataManager.deleteUser(user: users[indexPath.row])
+    }
+    
+    func showDetailController(data: Person) {
+        coordinator?.moveToDetail(withData: data)
     }
 }

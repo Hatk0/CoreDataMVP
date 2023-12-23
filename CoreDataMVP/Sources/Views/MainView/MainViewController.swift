@@ -124,6 +124,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let user = mainPresenter?.users[indexPath.row] {
+            mainPresenter?.coordinator?.moveToDetail(withData: user)
+        } else {
+            print("Невозможно выполнить операцию moveToDetail")
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

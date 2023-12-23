@@ -19,6 +19,7 @@
 		73D33C3D2B37055B0067C85A /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C3C2B37055B0067C85A /* Factory.swift */; };
 		73D33C432B370F490067C85A /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C422B370F490067C85A /* MainPresenter.swift */; };
 		73D33C472B3716090067C85A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C462B3716090067C85A /* DetailViewController.swift */; };
+		73D33C4A2B3717250067C85A /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C492B3717250067C85A /* DetailPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		73D33C3C2B37055B0067C85A /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		73D33C422B370F490067C85A /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		73D33C462B3716090067C85A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		73D33C492B3717250067C85A /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				73D33C412B370F3E0067C85A /* MainPresenter */,
+				73D33C482B3717010067C85A /* DetailPresenter */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -179,6 +182,14 @@
 				73D33C462B3716090067C85A /* DetailViewController.swift */,
 			);
 			path = DetailView;
+			sourceTree = "<group>";
+		};
+		73D33C482B3717010067C85A /* DetailPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				73D33C492B3717250067C85A /* DetailPresenter.swift */,
+			);
+			path = DetailPresenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +266,7 @@
 				73D33C342B360DDB0067C85A /* CoreDataModel.xcdatamodeld in Sources */,
 				73D33C182B3608E20067C85A /* MainViewController.swift in Sources */,
 				73D33C372B36208A0067C85A /* UIViewController+Ext.swift in Sources */,
+				73D33C4A2B3717250067C85A /* DetailPresenter.swift in Sources */,
 				73D33C432B370F490067C85A /* MainPresenter.swift in Sources */,
 				73D33C142B3608E20067C85A /* AppDelegate.swift in Sources */,
 				73D33C312B360AF90067C85A /* CoreDataManager.swift in Sources */,

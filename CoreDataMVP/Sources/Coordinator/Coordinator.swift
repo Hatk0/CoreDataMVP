@@ -38,4 +38,9 @@ class ProjectCoordinator: CoordinatorRoot, Coordinator {
     func addChildCoordinator(_ coordinator: Coordinator) {
         childCoordinators.append(coordinator)
     }
+    
+    func moveToDetail(withData data: Person){
+        let viewController = factory.makeDetailViewController(coordinator: self, data: data)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }

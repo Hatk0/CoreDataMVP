@@ -2,6 +2,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    var detailPresenter: DetailPresenter?
+    
     // MARK: - UI
     
     // MARK: - Lifecycle
@@ -33,3 +35,9 @@ class DetailViewController: UIViewController {
 }
 
 // MARK: - Extensions
+
+extension DetailViewController {
+    func setPresenter(presenter: DetailPresenter){
+        self.detailPresenter = presenter
+    }
+}
