@@ -18,6 +18,7 @@
 		73D33C3A2B36C6E90067C85A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C392B36C6E90067C85A /* Coordinator.swift */; };
 		73D33C3D2B37055B0067C85A /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C3C2B37055B0067C85A /* Factory.swift */; };
 		73D33C432B370F490067C85A /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C422B370F490067C85A /* MainPresenter.swift */; };
+		73D33C472B3716090067C85A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C462B3716090067C85A /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		73D33C392B36C6E90067C85A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		73D33C3C2B37055B0067C85A /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		73D33C422B370F490067C85A /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		73D33C462B3716090067C85A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +118,8 @@
 		73D33C2B2B360A3C0067C85A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				73D33C172B3608E20067C85A /* MainViewController.swift */,
+				73D33C442B3715E60067C85A /* MainView */,
+				73D33C452B3715F00067C85A /* DetailView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +163,22 @@
 				73D33C422B370F490067C85A /* MainPresenter.swift */,
 			);
 			path = MainPresenter;
+			sourceTree = "<group>";
+		};
+		73D33C442B3715E60067C85A /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				73D33C172B3608E20067C85A /* MainViewController.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		73D33C452B3715F00067C85A /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				73D33C462B3716090067C85A /* DetailViewController.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +258,7 @@
 				73D33C432B370F490067C85A /* MainPresenter.swift in Sources */,
 				73D33C142B3608E20067C85A /* AppDelegate.swift in Sources */,
 				73D33C312B360AF90067C85A /* CoreDataManager.swift in Sources */,
+				73D33C472B3716090067C85A /* DetailViewController.swift in Sources */,
 				73D33C162B3608E20067C85A /* SceneDelegate.swift in Sources */,
 				73D33C3A2B36C6E90067C85A /* Coordinator.swift in Sources */,
 			);
