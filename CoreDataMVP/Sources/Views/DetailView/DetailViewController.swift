@@ -65,6 +65,17 @@ class DetailViewController: UIViewController {
         return textField
     }()
     
+    private lazy var birthDateTextField: UITextField = {
+       let textField = UITextField()
+        let image = UIImage(systemName: "birthday.cake.fill")
+        textField.setIcon(image ?? UIImage())
+        textField.borderStyle = .roundedRect
+        textField.tintColor = .systemBlue
+        textField.backgroundColor = .systemGray6
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -82,7 +93,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        let views = [editButton, roundPicture, openGalleryButton, nameTextField]
+        let views = [editButton, roundPicture, openGalleryButton, nameTextField,birthDateTextField]
         views.forEach { view.addSubview($0) }
     }
     
@@ -104,7 +115,12 @@ class DetailViewController: UIViewController {
             nameTextField.topAnchor.constraint(equalTo: openGalleryButton.bottomAnchor, constant: 40),
             nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nameTextField.widthAnchor.constraint(equalToConstant: 350),
-            nameTextField.heightAnchor.constraint(equalToConstant: 40)
+            nameTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            birthDateTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
+            birthDateTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            birthDateTextField.widthAnchor.constraint(equalToConstant: 350),
+            birthDateTextField.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     
