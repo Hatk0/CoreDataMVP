@@ -22,6 +22,7 @@
 		73D33C4A2B3717250067C85A /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C492B3717250067C85A /* DetailPresenter.swift */; };
 		73D33C4E2B3727B40067C85A /* UIViewControllerBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C4D2B3727B40067C85A /* UIViewControllerBar+Ext.swift */; };
 		73D33C502B3731A40067C85A /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C4F2B3731A40067C85A /* UIImageView+Ext.swift */; };
+		73D33C522B373A180067C85A /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C512B373A180067C85A /* UITextField+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		73D33C492B3717250067C85A /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		73D33C4D2B3727B40067C85A /* UIViewControllerBar+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerBar+Ext.swift"; sourceTree = "<group>"; };
 		73D33C4F2B3731A40067C85A /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
+		73D33C512B373A180067C85A /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				73D33C362B36208A0067C85A /* UIViewController+Ext.swift */,
 				73D33C4D2B3727B40067C85A /* UIViewControllerBar+Ext.swift */,
 				73D33C4F2B3731A40067C85A /* UIImageView+Ext.swift */,
+				73D33C512B373A180067C85A /* UITextField+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				73D33C3D2B37055B0067C85A /* Factory.swift in Sources */,
 				73D33C342B360DDB0067C85A /* CoreDataModel.xcdatamodeld in Sources */,
 				73D33C182B3608E20067C85A /* MainViewController.swift in Sources */,
+				73D33C522B373A180067C85A /* UITextField+Ext.swift in Sources */,
 				73D33C372B36208A0067C85A /* UIViewController+Ext.swift in Sources */,
 				73D33C4A2B3717250067C85A /* DetailPresenter.swift in Sources */,
 				73D33C432B370F490067C85A /* MainPresenter.swift in Sources */,
