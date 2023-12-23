@@ -54,6 +54,17 @@ class DetailViewController: UIViewController {
         return button
     }()
     
+    private lazy var nameTextField: UITextField = {
+       let textField = UITextField()
+        let image = UIImage(systemName: "person.circle.fill")
+        textField.setIcon(image ?? UIImage())
+        textField.borderStyle = .roundedRect
+        textField.tintColor = .systemBlue
+        textField.backgroundColor = .systemGray6
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -71,7 +82,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        let views = [editButton, roundPicture, openGalleryButton]
+        let views = [editButton, roundPicture, openGalleryButton, nameTextField]
         views.forEach { view.addSubview($0) }
     }
     
@@ -89,6 +100,11 @@ class DetailViewController: UIViewController {
             
             openGalleryButton.topAnchor.constraint(equalTo: roundPicture.bottomAnchor, constant: 20),
             openGalleryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            nameTextField.topAnchor.constraint(equalTo: openGalleryButton.bottomAnchor, constant: 40),
+            nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nameTextField.widthAnchor.constraint(equalToConstant: 350),
+            nameTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
