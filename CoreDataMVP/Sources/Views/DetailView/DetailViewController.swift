@@ -4,6 +4,8 @@ class DetailViewController: UIViewController {
     
     var detailPresenter: DetailPresenter?
     
+    private var avatar: Data? = nil
+    
     // MARK: - UI
     
     private lazy var editButton: UIButton = {
@@ -43,6 +45,15 @@ class DetailViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var openGalleryButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Set new photo", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(openGalleryButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -60,7 +71,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        let views = [editButton, roundPicture]
+        let views = [editButton, roundPicture, openGalleryButton]
         views.forEach { view.addSubview($0) }
     }
     
@@ -74,7 +85,10 @@ class DetailViewController: UIViewController {
             roundPicture.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 80),
             roundPicture.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             roundPicture.widthAnchor.constraint(equalToConstant: 180),
-            roundPicture.heightAnchor.constraint(equalToConstant: 180)
+            roundPicture.heightAnchor.constraint(equalToConstant: 180),
+            
+            openGalleryButton.topAnchor.constraint(equalTo: roundPicture.bottomAnchor, constant: 20),
+            openGalleryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
@@ -83,6 +97,15 @@ class DetailViewController: UIViewController {
     @objc
     func editButtonTapped() {
         
+    }
+    
+    @objc
+    func openGalleryButtonTapped() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true)
     }
 }
 
@@ -93,3 +116,15 @@ extension DetailViewController {
         self.detailPresenter = presenter
     }
 }
+
+extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
+        roundPicture.contentMode = .scaleAspectFit
+        roundPicture.image = image
+        avatar = image?.pngData()
+        dismiss(animated: true)
+    }
+}
+
