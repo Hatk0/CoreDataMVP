@@ -21,6 +21,7 @@
 		73D33C472B3716090067C85A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C462B3716090067C85A /* DetailViewController.swift */; };
 		73D33C4A2B3717250067C85A /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C492B3717250067C85A /* DetailPresenter.swift */; };
 		73D33C4E2B3727B40067C85A /* UIViewControllerBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C4D2B3727B40067C85A /* UIViewControllerBar+Ext.swift */; };
+		73D33C502B3731A40067C85A /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D33C4F2B3731A40067C85A /* UIImageView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		73D33C462B3716090067C85A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		73D33C492B3717250067C85A /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		73D33C4D2B3727B40067C85A /* UIViewControllerBar+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewControllerBar+Ext.swift"; sourceTree = "<group>"; };
+		73D33C4F2B3731A40067C85A /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			children = (
 				73D33C362B36208A0067C85A /* UIViewController+Ext.swift */,
 				73D33C4D2B3727B40067C85A /* UIViewControllerBar+Ext.swift */,
+				73D33C4F2B3731A40067C85A /* UIImageView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				73D33C432B370F490067C85A /* MainPresenter.swift in Sources */,
 				73D33C4E2B3727B40067C85A /* UIViewControllerBar+Ext.swift in Sources */,
 				73D33C142B3608E20067C85A /* AppDelegate.swift in Sources */,
+				73D33C502B3731A40067C85A /* UIImageView+Ext.swift in Sources */,
 				73D33C312B360AF90067C85A /* CoreDataManager.swift in Sources */,
 				73D33C472B3716090067C85A /* DetailViewController.swift in Sources */,
 				73D33C162B3608E20067C85A /* SceneDelegate.swift in Sources */,

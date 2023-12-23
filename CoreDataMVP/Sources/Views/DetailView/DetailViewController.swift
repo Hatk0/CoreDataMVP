@@ -27,6 +27,22 @@ class DetailViewController: UIViewController {
         return button
     }()
 
+    private lazy var roundPicture: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 90
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        if let data = detailPresenter?.user?.avatar, let image = UIImage(data: data) {
+            imageView.image = image
+        } else {
+            imageView.setDefaultUserImage()
+        }
+
+        return imageView
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -44,7 +60,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        let views = [editButton]
+        let views = [editButton, roundPicture]
         views.forEach { view.addSubview($0) }
     }
     
@@ -53,7 +69,12 @@ class DetailViewController: UIViewController {
             editButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             editButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             editButton.widthAnchor.constraint(equalToConstant: 80),
-            editButton.heightAnchor.constraint(equalToConstant: 30)
+            editButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            roundPicture.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 80),
+            roundPicture.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            roundPicture.widthAnchor.constraint(equalToConstant: 180),
+            roundPicture.heightAnchor.constraint(equalToConstant: 180)
         ])
     }
     
