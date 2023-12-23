@@ -51,10 +51,9 @@ class MainViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Users"
-        navigationController?.navigationBar.prefersLargeTitles = true
         mainPresenter?.fetchAllUsers()
         self.hideKeyboardWhenTappedAround()
+        setupNavigationBar()
     }
     
     private func setupHierarchy() {
