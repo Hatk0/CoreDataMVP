@@ -1,8 +1,12 @@
 import UIKit
 
+// MARK: - Protocols
+
 protocol Factory {
     func makeMainViewController(coordinator: ProjectCoordinator) -> MainViewController
 }
+
+// MARK: - FactoryPattern
 
 class FactoryPattern: Factory {
     
@@ -14,6 +18,8 @@ class FactoryPattern: Factory {
     
     func makeMainViewController(coordinator: ProjectCoordinator) -> MainViewController {
         let viewController = MainViewController()
+        let presenter = MainPresenter(view: viewController, coordinator: coordinator, coreDataManager: coreDataManager)
+        viewController.setPresenter(presenter)
         return viewController
     }
     

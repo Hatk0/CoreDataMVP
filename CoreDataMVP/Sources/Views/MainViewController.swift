@@ -2,6 +2,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var mainPresenter: MainPresenter?
+    
     // MARK: - UI
     
     private lazy var printNameTextField: UITextField = {
@@ -51,6 +53,7 @@ class MainViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Users"
         navigationController?.navigationBar.prefersLargeTitles = true
+        mainPresenter?.fetchAllUsers()
         self.hideKeyboardWhenTappedAround()
     }
     
@@ -85,7 +88,8 @@ class MainViewController: UIViewController {
     @objc
     func buttonTapped() {
         if printNameTextField.text != "" {
-            print("")
+            mainPresenter?.saveUserName(name: printNameTextField.text ?? "")
+            mainPresenter?.fetchAllUsers()
         } else {
             let alert = UIAlertController(title: "Nothing was written",
                                           message: "Please enter your name",
@@ -94,18 +98,26 @@ class MainViewController: UIViewController {
             self.present(alert, animated: true)
         }
         self.printNameTextField.text = ""
+        self.listTableView.reloadData()
     }
 }
 
 // MARK: - Extensions
 
+extension MainViewController {
+    func setPresenter(_ presenter: MainPresenter) {
+        self.mainPresenter = presenter
+    }
+}
+
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return mainPresenter?.users.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = mainPresenter?.users[indexPath.row].name
         cell.accessoryType = .disclosureIndicator
         return cell
     }
@@ -117,6 +129,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
+            mainPresenter?.deleteUser(indexPath: indexPath)
+            mainPresenter?.users.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         }
