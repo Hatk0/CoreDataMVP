@@ -151,17 +151,20 @@ class DetailViewController: UIViewController {
             
             nameTextField.topAnchor.constraint(equalTo: openGalleryButton.bottomAnchor, constant: 20),
             nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameTextField.widthAnchor.constraint(equalToConstant: 350),
+            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             nameTextField.heightAnchor.constraint(equalToConstant: 60),
             
             birthDateTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
             birthDateTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            birthDateTextField.widthAnchor.constraint(equalToConstant: 350),
+            birthDateTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            birthDateTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             birthDateTextField.heightAnchor.constraint(equalToConstant: 60),
             
             genderTextField.topAnchor.constraint(equalTo: birthDateTextField.bottomAnchor, constant: 10),
             genderTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            genderTextField.widthAnchor.constraint(equalToConstant: 350),
+            genderTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            genderTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             genderTextField.heightAnchor.constraint(equalToConstant: 60),
         ])
     }
