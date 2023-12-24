@@ -5,10 +5,12 @@ class DetailViewController: UIViewController {
     var detailPresenter: DetailPresenter?
     
     private var avatar: Data? = nil
+    private let genderArray = ["Male", "Female", "Other"]
     
     // MARK: - UI
     
     private let datePicker = UIDatePicker()
+    private let genderPicker = UIPickerView()
     
     private lazy var editButton: UIButton = {
         let button = UIButton()
@@ -105,6 +107,7 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
         setBirthDatePicker()
+        setGenderPicker()
     }
     
     private func setupHierarchy() {
@@ -165,6 +168,12 @@ class DetailViewController: UIViewController {
         datePicker.maximumDate = maximumBirthDate
     }
     
+    private func setGenderPicker() {
+        genderPicker.delegate = self
+        genderPicker.dataSource = self
+        genderTextField.inputView = genderPicker
+    }
+    
     // MARK: - Action
     
     @objc
@@ -213,3 +222,20 @@ extension DetailViewController: UIImagePickerControllerDelegate, UINavigationCon
     }
 }
 
+extension DetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genderArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genderArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        genderTextField.text = genderArray[row]
+    }
+}
