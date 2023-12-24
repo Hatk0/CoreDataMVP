@@ -8,6 +8,8 @@ class DetailViewController: UIViewController {
     
     // MARK: - UI
     
+    private let datePicker = UIDatePicker()
+    
     private lazy var editButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 12
@@ -102,6 +104,7 @@ class DetailViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
+        setBirthDatePicker()
     }
     
     private func setupHierarchy() {
@@ -141,6 +144,27 @@ class DetailViewController: UIViewController {
         ])
     }
     
+    private func setBirthDatePicker() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        birthDateTextField.inputView = datePicker
+        birthDateTextField.inputAccessoryView = toolBar
+        
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([flexSpace, doneButton], animated: true)
+        
+        let minimumBirthDate = Calendar.current.date(byAdding: .year, value: -73, to: Date())
+        let maximumBirthDate = Calendar.current.date(byAdding: .year, value: -8, to: Date())
+        datePicker.minimumDate = minimumBirthDate
+        datePicker.maximumDate = maximumBirthDate
+    }
+    
     // MARK: - Action
     
     @objc
@@ -155,6 +179,18 @@ class DetailViewController: UIViewController {
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         present(imagePicker, animated: true)
+    }
+    
+    @objc
+    func doneAction() {
+        getDateFromPicker()
+        view.endEditing(true)
+    }
+    
+    private func getDateFromPicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        birthDateTextField.text = formatter.string(from: datePicker.date)
     }
 }
 
