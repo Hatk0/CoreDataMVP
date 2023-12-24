@@ -56,6 +56,20 @@ class MainViewController: UIViewController {
         setupNavigationBar()
     }
     
+    private func setupNavigationBar() {
+        title = "Users"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let backButton = UIImage(systemName: "arrow.left")
+        navigationController?.navigationBar.backIndicatorImage = backButton
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButton
+        navigationController?.navigationBar.backItem?.title = ""
+        
+        let backBarButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        backBarButton.tintColor = .systemBlue
+        navigationItem.backBarButtonItem = backBarButton
+    }
+    
     private func setupHierarchy() {
         let views = [printNameTextField, pressButton, listTableView]
         views.forEach { view.addSubview($0) }

@@ -5,6 +5,7 @@ class DetailViewController: UIViewController {
     var detailPresenter: DetailPresenter?
     
     private var avatar: Data? = nil
+    private var inEditMode = Bool()
     private let genderArray = ["Male", "Female", "Other"]
     
     // MARK: - UI
@@ -54,6 +55,7 @@ class DetailViewController: UIViewController {
         button.setTitle("Set new photo", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(openGalleryButtonTapped), for: .touchUpInside)
+        button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -62,20 +64,28 @@ class DetailViewController: UIViewController {
        let textField = UITextField()
         let image = UIImage(systemName: "person.circle.fill")
         textField.setIcon(image ?? UIImage())
+        textField.text = detailPresenter?.user?.name
         textField.borderStyle = .roundedRect
         textField.tintColor = .systemBlue
         textField.backgroundColor = .systemGray6
+        textField.isUserInteractionEnabled = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     private lazy var birthDateTextField: UITextField = {
-       let textField = UITextField()
+        let textField = UITextField()
         let image = UIImage(systemName: "birthday.cake.fill")
         textField.setIcon(image ?? UIImage())
+
+        let dateFormatter = DateFormatter.birthDateFormat()
+
+        textField.text = detailPresenter?.user?.birthDate.map { dateFormatter.string(from: $0) } ?? ""
+        
         textField.borderStyle = .roundedRect
         textField.tintColor = .systemBlue
         textField.backgroundColor = .systemGray6
+        textField.isUserInteractionEnabled = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -84,9 +94,11 @@ class DetailViewController: UIViewController {
         let textField = UITextField()
         let image = UIImage(systemName: "allergens.fill")
         textField.setIcon(image ?? UIImage())
+        textField.text = detailPresenter?.user?.gender
         textField.borderStyle = .roundedRect
         textField.tintColor = .systemBlue
         textField.backgroundColor = .systemGray6
+        textField.isUserInteractionEnabled = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -108,6 +120,13 @@ class DetailViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         setBirthDatePicker()
         setGenderPicker()
+        saveData()
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        let buttonEdit = UIBarButtonItem(customView: editButton)
+        navigationItem.rightBarButtonItem = buttonEdit
     }
     
     private func setupHierarchy() {
@@ -122,7 +141,7 @@ class DetailViewController: UIViewController {
             editButton.widthAnchor.constraint(equalToConstant: 80),
             editButton.heightAnchor.constraint(equalToConstant: 30),
             
-            roundPicture.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 80),
+            roundPicture.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             roundPicture.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             roundPicture.widthAnchor.constraint(equalToConstant: 180),
             roundPicture.heightAnchor.constraint(equalToConstant: 180),
@@ -130,7 +149,7 @@ class DetailViewController: UIViewController {
             openGalleryButton.topAnchor.constraint(equalTo: roundPicture.bottomAnchor, constant: 20),
             openGalleryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            nameTextField.topAnchor.constraint(equalTo: openGalleryButton.bottomAnchor, constant: 40),
+            nameTextField.topAnchor.constraint(equalTo: openGalleryButton.bottomAnchor, constant: 20),
             nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nameTextField.widthAnchor.constraint(equalToConstant: 350),
             nameTextField.heightAnchor.constraint(equalToConstant: 60),
@@ -174,11 +193,46 @@ class DetailViewController: UIViewController {
         genderTextField.inputView = genderPicker
     }
     
+    private func saveData() {
+        if let user = detailPresenter?.user {
+            let dateFormatter = DateFormatter.birthDateFormat()
+
+            let birthDate = dateFormatter.date(from: birthDateTextField.text ?? "")
+
+            detailPresenter?.updateUser(user: user,
+                                        avatar: avatar,
+                                        name: nameTextField.text ?? " ",
+                                        birthDate: birthDate ?? Date(),
+                                        gender: genderTextField.text ?? "")
+        }
+    }
+    
     // MARK: - Action
     
     @objc
     func editButtonTapped() {
+        inEditMode.toggle()
+        let newTitle = inEditMode ? "Save" : "Edit"
+        let buttonStyle: (isEnabled: Bool, borderStyle: UITextField.BorderStyle) = inEditMode ?
+            (true, .roundedRect) : (false, .none)
         
+        editButton.setAttributedTitle(NSAttributedString(string: newTitle, attributes: [
+            .foregroundColor: UIColor.systemBlue,
+            .font: UIFont.systemFont(ofSize: 16)
+        ]), for: .normal)
+
+        openGalleryButton.isHidden = !inEditMode
+        
+        nameTextField.isUserInteractionEnabled = buttonStyle.isEnabled
+        nameTextField.borderStyle = buttonStyle.borderStyle
+        
+        birthDateTextField.isUserInteractionEnabled = buttonStyle.isEnabled
+        birthDateTextField.borderStyle = buttonStyle.borderStyle
+        
+        genderTextField.isUserInteractionEnabled = buttonStyle.isEnabled
+        genderTextField.borderStyle = buttonStyle.borderStyle
+
+        saveData()
     }
     
     @objc
@@ -197,8 +251,7 @@ class DetailViewController: UIViewController {
     }
     
     private func getDateFromPicker() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yy"
+        let formatter = DateFormatter.birthDateFormat()
         birthDateTextField.text = formatter.string(from: datePicker.date)
     }
 }
@@ -237,5 +290,12 @@ extension DetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         genderTextField.text = genderArray[row]
+    }
+}
+
+extension DetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        editButtonTapped()
+        return true
     }
 }
